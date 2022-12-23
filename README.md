@@ -11,19 +11,19 @@ Notes on the book Clean Code - A Handbook of Agile Software Craftsmanship by Rob
 2. [Meaningful Names](#meaningful-names)
 3. [Functions](#functions)
 4. [Comments](#comments)
-5. [Formatting](#formatting) 
-6. [Objects and Data Structures](#objects-and-data-structures) 
-7. [Error Handling](#error-handling) 
-8. [Boundaries](#boundaries) 
+5. [Formatting](#formatting)
+6. [Objects and Data Structures](#objects-and-data-structures)
+7. [Error Handling](#error-handling)
+8. [Boundaries](#boundaries)
 9. [Unit Tests](#unit-tests)
-10. [Classes](#classes) 
-11. [Systems](#systems) 
+10. [Classes](#classes)
+11. [Systems](#systems)
 12. [Emergence](#emergence)
 13. [Concurrency](#concurrency)
-14. [Successive Reﬁnement](#successive-refinement) 
-15. [JUnit Internals](#junit-internals) 
-16. [Refactoring SerialDate](#refactoring-serialdate) 
-17. [Smells and Heuristics](#smells-and-heuristics) 
+14. [Successive Reﬁnement](#successive-refinement)
+15. [JUnit Internals](#junit-internals)
+16. [Refactoring SerialDate](#refactoring-serialdate)
+17. [Smells and Heuristics](#smells-and-heuristics)
 
 # <a name="foreword">Foreword</a>
 Small things matter. God is in the details.
@@ -114,7 +114,7 @@ Names are everywhere in software: variables, functions, args, classes, packages,
 ## Use Intention-Revealing Names
 The name should answer all the big questions:
 * Why it exists?
-* What it does? 
+* What it does?
 * How it is used?
 
 Avoid use this like:
@@ -159,13 +159,13 @@ public List<Cell> getFlaggedCells() {
 	return flaggedCells;
 }
 ```
-## Avoid Disinformation 
+## Avoid Disinformation
 If you want to name a group of accounts use **accounts** try to avoid *accountList* (maybe its type is not a List)
 
 Beware of using names that are very similar *XYZFooBarClassForBlabla* and *XYZFooBarClassForBlablable*
 
 Using lower case *l* (looks like 1) and uppercase *O* (looks like 0) are also unhelpful.
-## Make Meaningful Distinctions 
+## Make Meaningful Distinctions
 
 Do not use number-series naming: a1, a2, ... aN
 
@@ -178,11 +178,11 @@ public static void copyChars(char a1[], char a2[]) {
 ```
 This would be much better with **source** and **destination** as argument names.
 
-Avoid Noise words (Info, Data, a, an, the, variable, table, String): 
+Avoid Noise words (Info, Data, a, an, the, variable, table, String):
 * ProductInfo and ProductData are more or less the same.
 * Is nameString better than name? No.
 
-The same for methods, what I should do?: 
+The same for methods, what I should do?:
 getActiveAccount() getActiveAccounts() getActiveAccountInfo()
 
 ## Use Pronounceable Names
@@ -200,7 +200,7 @@ class Customer {
 	/* ... */
 }
 ```
-## Use Searchable Names 
+## Use Searchable Names
 Single letter names and numeric constants are not easy to locate across a body of text.
 i.e.:
 ```java
@@ -219,20 +219,20 @@ for (int j=0; j < NUMBER_OF_TASKS; j++) {
 	sum += realTaskWeeks;
 }
 ```
-## Avoid Encodings 
+## Avoid Encodings
 
 Don't use symbols, emojis.
 ## Hungarian Notation, Member Preﬁxes
 
 Old examples from Fortran, BASIC. No longer likely to be applicable.
-## Interfaces and Implementations 
+## Interfaces and Implementations
 Leave interfaces unadorned:
 
 *ShapeFactory* and *ShapeFactoryImp* are better than *IShapeFactory* and *ShapeFactory*
-## Avoid Mental Mapping 
+## Avoid Mental Mapping
 Just because you *can* remember that `this` means `that` doesn't mean you should write your code that way.
 > One difference between a smart programmer and a professional programmer is that the professional understands *clarity is king*. Professionals use their powers for good and write code that others can understand.
-## Class Names 
+## Class Names
 A class name should be a **noun**, not a verb. Avoid words like Manager, Processor, Data, or Info.
 Good names could be: Customer, WikiPage, Account, AddressParser.
 ## Method Names
@@ -246,21 +246,21 @@ better than
 ```java
 Complex fulcrumPoint = new Complex(23.0);
 ```
-## Don’t Be Cute 
+## Don’t Be Cute
 Don't use slang!: whack() instead of kill()
 
 **Say what you mean. Mean what you say.**
 ## Pick One Word per Concept
 If you choose *get()* use it always (instead of fetch, retrieve, etc.)
-## Don’t Pun 
+## Don’t Pun
 Avoid using the same word for two purposes (*add()* method could mean different things in different classes...)
 
 **Make your code as easy as possible to understand.**
-## Use Solution Domain Names 
+## Use Solution Domain Names
 Use pattern names: Factory, Visitor, Decorator, etc. The people who read your code will be programmers so if there is a commonly understood term, it's ok to use it.
 ## Use Problem Domain Names
 And you could ask a domain expert if you have doubts when there is no 'programmer way' to define something. I.e. the term you use is familiar to people in the project, company, etc.
-## Add Meaningful Context 
+## Add Meaningful Context
 Variables usually don't have a mean by themselves. You will need a context.
 
 Names like: firstName, lastName, street, postalCode, etc. Are names from an address.
@@ -271,14 +271,28 @@ But It would be better if you put them into a class Address => you will have a g
 
 When a method has a lot of variables with an unclear context you can try to break it into smaller functions.
 
-## Don’t Add Gratuitous Context 
+## Don’t Add Gratuitous Context
 Don't use prefix in all your classes/methods to say that they belongs to an specific context.
 Gas Station Deluxe => GSD and then you have: GSDAccountAddress... it is not a good name.
 
 **Shorter names are generally better than longer ones**.
 
-## Final Words 
+## Final Words
 Follow these rules and refactor code to help resolve these problems.
+
+## Additional
+
+| Section | Addition or comment |
+|-|-|
+| Avoid Disinformation | Don't use types in names |
+| Pick One Word Per Concept | Also applies to larger concepts like classes or hierarchies and patterns |
+| Use Searchable Names | Searchable means descriptive and whole words so you can use your editors search function. Single letter names or arbitrary abbreviations will not help you with that |
+| Avoid Mental Mapping | Mental mapping means that the reader of the code has to know what a name means. It is not obvious to someone not knowing the project |
+
+| Codesmell | Refactoring |
+|-|-|
+| type in names | Example: Use plural instead of collection implementation names or organize your code in a way where it is obvious from the context or the type does not matter to understand the code |
+
 
 # <a name="functions">3. Functions</a>
 Functions are the first line of organization in any program.
@@ -308,16 +322,16 @@ A function do one thing though it contains calls to other functions. But those f
 
 We create functions to decompose a larger concept (the name of the function) into a set of steps at the next level of abstraction.
 
-## Sections within Functions 
+## Sections within Functions
 **A function that is divided into section will be probably doing more than one thing.**
 
-## One Level of Abstraction per Function 
+## One Level of Abstraction per Function
 Don't mix levels of abstraction in a function. It gets harder to tell whether a particular expression is important of a small detail.
 
 ## Reading Code from Top to Bottom: The Stepdown Rule
 Write code like a top-down set of TO-paragraphs where each paragraph provides further instructions on the one before it. TO build the page we include setups then include the test page. TO include setups we include the suite setup if this is a suite. TO include the suite setup...
 
-## Switch Statements 
+## Switch Statements
 Switch statements always do N things.
 
 Use them to create polymorphic objects. Abstract Factory pattern.
@@ -350,7 +364,7 @@ Zero arguments > One argument > Two arguments
 
 Try to avoid other forms.
 
-## Flag Arguments 
+## Flag Arguments
 Flag arguments (true|false) are ugly. Functions with that do one thing if it is true and another thing if is false.
 
 Split the function in two:
@@ -368,7 +382,7 @@ The are harder to understand than dyadic functions.
 When a function needs to have more than two or three arguments some of these argument should be wrapped into a class of their own.
 *makeCircle(double x, double y, double radius) =>  makeCircle(Point center, double radius);*
 
-## Argument Lists 
+## Argument Lists
 Function that takes argument lists can be monads, dyads or even triads:
 *void monad(String... args); void dyad(String name, String... args); void triad(String name, int count, String... args)*
 
@@ -379,41 +393,41 @@ We can encode the name of the arguments into the function name:
 And we can do more meaning to the argument:
 *write(name) => writeField(name)*
 
-## Have No Side Effects 
+## Have No Side Effects
 Functions should not do things that you don't expect.
 i.e: checkPassword(login, password) => inside initializes the user session...initializing the user session should be its own function.
 
-## Output Arguments 
+## Output Arguments
 The should be avoided with OOP. If you see `appendFooter(s)`, is `s` being appended to something, or are you appending something to `s`?
 *void appendFooter(StringBuffer report); => report.appendFooter();*
 
-## Command Query Separation 
+## Command Query Separation
 Functions should either do something or answer something, but not both.
 *attributeExists and setAttribute* should be different functions. Avoid things like *setAndCheckIfExists*
 
-## Prefer Exceptions to Returning Error Codes 
+## Prefer Exceptions to Returning Error Codes
 Error codes violate Command Query Separation.
 
 Exceptions can help to separate the happy path code from the error path and that helps to simplificate.
 
-## Extract Try/Catch Blocks 
+## Extract Try/Catch Blocks
 Try/catch's are ugly. It is better to extract try and catch methods.
 
 ## Error Handling Is One Thing
 Methods with try/catch should only have this structure and nothing more.
 
-## The Error.java Dependency Magnet 
+## The Error.java Dependency Magnet
 Error codes are usually in classes like Error.java (with constants). Avoid that, it is a dependency magnet (it is everywhere) and nobody wants to add new errors or change it because you have to recompile/deploy everything. Instead the tendency will be to re-use error codes for uses they aren't intended for.
 
 Use Exceptions instead of Error codes.
 
-## Don’t Repeat Yourself 
+## Don’t Repeat Yourself
 Duplication may be the root of all evil in software.
 
-## Structured Programming 
+## Structured Programming
 Things like "there should only be one return statement" is unnecessary when you create small functions.
 
-## How Do You Write Functions Like This? 
+## How Do You Write Functions Like This?
 * Write ugly and long functions with a long list of arguments
 * You need to have unit tests that cover all that functions.
 * Then you can to massage and refine that code. You can break everything in classes and keep your test passing.
@@ -423,7 +437,19 @@ Functions are the verbs and classes are the nouns of the language of our system.
 
 Your real goal is to tell the story of the System. You have to write functions that help you to tell that story.
 
+## Additional
 
+| Section | Addition or comment |
+|-|-|
+| Blocks and Indenting | Especially nested conditionals make methods complex and hard to understand |
+| One Level of Abstraction per Function | Here abstraction means differences in `level` like method calls vs. conditionals vs. setting a member variable |
+| Argument Objects | Instead of creating and combining values into objects that get passed into a function, it might be more useful to extract that function into a new object that already holds some or all of those arguments as members. Some of them might be reused in calls with different arguments and therefore don't need to be added as a parameter to that function but rather the object itself. |
+
+| Codesmell | Refactoring | Reference |
+|-|-|-|
+| Blocks and Indenting | Conditionals can be replaced by inheritance. This moves the deciding logic to a central place where different objects are created (Factory etc.). When reading the refactored method, it's easier to understand the single steps without having to understand their exact implementation or variation of the latter | `DP` -> `Creational Patterns`, `CA` -> `DIP/Factories`, `IP` -> `Methods` -> `Factory Method/Internal Factory` |
+| Switch Statements | See `Blocks and Indenting` |
+| Side effects | If you follow the functional approach strictly, then no function is allowed to have side effects. At least to some extent that makes sense and helps reducing complexity and unexpected behavior. Instead of setting a field after a calculation, the function may just return the new value. If the functions has more than one occurences of updated fields, the new values might either be coupled into a new return object or the function can be split to do only one thing where it makes sense. | `CA` -> Functional Programming |
 
 # <a name="comments">4. Comments</a>
 If we were expressive enough in our programming language we would not need comments.
@@ -435,7 +461,7 @@ Code changes and evolves...the comments don't always get moved or updated with c
 ## Comments Do Not Make Up for Bad Code
 "Ooh, I would better comment that!" => No! You would be better clean it!
 
-## Explain Yourself in Code 
+## Explain Yourself in Code
 This:
 ```java
 // Check to see if the employee is eligible for full benefits
@@ -463,7 +489,7 @@ Take care that there is no better way, and then take even more care that they ar
 ### Clariﬁcation
 If you do it take care that there is no better way and the are accurate.
 
-### Warning of Consequences 
+### Warning of Consequences
 Warn other programmers about certain consequences:
 - Maybe a test that lasts a lot => try to use @Ignore
 - Something that is not thread safe and you have to use "new" each time.
@@ -479,15 +505,15 @@ If something is very very important you can amplify it.
 ### Javadocs in Public APIs
 If you are writing a public API => write good docs for it. (but they can lie as any other kind of comment).
 
-## Bad Comments 
+## Bad Comments
 Most comments fall into this category.
 
-### Mumbling 
+### Mumbling
 A catch block empty with a comment => was the author trying to tell himself to come later to do it?
 
 Any comment that forces you to look in another module to know the meaning is wrong.
 
-### Redundant Comments 
+### Redundant Comments
 * Less information than the code.
 * It is not easier to read than the code.
 * It is less precise
@@ -502,10 +528,10 @@ You will finally get things like: @param author The author
 ### Journal Comments
 We have source control now => they should be completely removed.
 
-### Noise Comments 
+### Noise Comments
 Auto generated or very obvious comments that are nothing but noise.
 
-### Scary Noise 
+### Scary Noise
 Maybe with copy/paste errores... are they a bug?
 
 ### Don’t Use a Comment When You Can Use a Function or a Variable
@@ -534,11 +560,11 @@ Might leave a comment to mark which braces close which part of the function. Bet
 Added by:... SCM's are a better place for this.
 ### Commented-Out Code
 Trust in SCM's... **delete the code**.
-### HTML Comments 
+### HTML Comments
 HTML in source code comments is an abomination: it makes them really hard to read.
-### Nonlocal Information 
+### Nonlocal Information
 The comment should describe the code it appears near.
-### Too Much Information 
+### Too Much Information
 ### Inobvious Connection
 Maybe the comment needs its own explanation...
 ### Function Headers
@@ -551,29 +577,29 @@ We want people to perceive that professionals have been at work... not to see a 
 **You should take care your code is nicely formatted**
 
 In a team: define a single set of formatting rules that everybody should comply.
-## The Purpose of Formatting 
+## The Purpose of Formatting
 Code formatting is about communication.
 
 Readability of code.
-## Vertical Formatting 
+## Vertical Formatting
 Small files are easier to understand than large files.
 
 It is possible to build significand system(junit, tomcat, ant, fitnesse) with files between **200-500 lines.**
-## The Newspaper Metaphor 
+## The Newspaper Metaphor
 **We would like a source file to be like a newspaper article**:
 - At the top you expect a headline
 - The first paragraph gives you a synopsis of the whole story.
 - As you continue downward the details increase
 
-In a source file: 
+In a source file:
 high-level concepts and algorithms => lowest level functions and details
 
-## Vertical Openness Between Concepts 
+## Vertical Openness Between Concepts
 * line => expression or clause.
 * group of lines => complete thought.
 * thoughts are separated with blank lines.
 
-## Vertical Density 
+## Vertical Density
 Useless comments in class's properties make the class more difficult to read it. Example
 ```java
 public class ReporterConfig {
@@ -601,7 +627,7 @@ public class ReporterConfig {
    m_properties.add(property);
 }
 ```
-## Vertical Distance 
+## Vertical Distance
 ### Variable declaration:
 **Variables should be declared as close to their usage as possible**
 Our functions are short -> local variables at the top.
@@ -614,14 +640,14 @@ If one functions calls another they should be vertically close, an the caller sh
 ### Conceptual Affinity
 Group of functions performing a similar operation.
 They share common naming scheme and perform variations of the same task. We want them to be close together.
-## Vertical Ordering 
+## Vertical Ordering
 Downward direction => flow from high level to low level
 ## Horizontal Formatting
 Programmers clearly prefer short lines.
 **Keep your lines short!**
 **Limit 120 characters**
 You should never have to scroll to the right
-## Horizontal Openness and Density 
+## Horizontal Openness and Density
 We use white spaces in:
 * Operators to accentuate them.
 * Arguments in function calls and definitions (after the comma).
@@ -665,7 +691,7 @@ public class FitNesseExpediter implements ResponseSender
     input =        s.getInputStream();
   }
 }
-``` 
+```
 vs
 ```java
 public class FitNesseExpediter implements ResponseSender
@@ -679,7 +705,7 @@ public class FitNesseExpediter implements ResponseSender
   }
 }
 
-``` 
+```
 ## Indentation
 **Without indentation programs would be virtually unreadable by humans**
 
@@ -694,7 +720,7 @@ If the body of a while/for is a dummy make the body indented and surrounded by b
 # <a name="objects-and-data-structures">6. Objects and Data Structures</a>
 We keep our variables private. Nobody depends on them. Freedom to change their type or implementation. If you don't need them don't expose the with public getters an setters!
 ## Data Abstraction
-Hiding implementation is about abstractions. 
+Hiding implementation is about abstractions.
 
 A class does not simply push its variables out through getters and setters. Rather it exposes abstract interfaces that allow its users to manipulate the essence of the data, without having to know its implementation.
 
@@ -734,7 +760,7 @@ public interface Vehicle {
 Abstract vehicle doesn't expose the details of the data.
 
 **The worst option is to blithely add getters and setters**
-## Data/Object Anti-Symmetry 
+## Data/Object Anti-Symmetry
 **Objects** vs **Data structures**
 * Objects hide their data behind abstractions and expose functions that operate on that data.
 * Data structures expose their data and have no meaningful functions.
@@ -765,7 +791,7 @@ Options opts = ctxt.getOptions();
 File scratchDir = opts.getScratchDir();
 final String outputDir = scratchDir.getAbsolutePath();
 ```
-### Train Wrecks 
+### Train Wrecks
 => bunch of coupled train cars!
 Is this a violation of Demeter's Law? it depends...
 * if context, options and scratchDir are objects is a clear violation of the Law.
@@ -775,10 +801,10 @@ If it was a data structure you could use it this way:
 ```java
 final String outputDir = ctxt.options.scratchDir.absolutePath;
 ```
-### Hybrids 
+### Hybrids
 Public fields + methods => Avoid creating them. Worst of both words: hard to add new functions and hard to add new data structures.
 
-### Hiding Structure 
+### Hiding Structure
 You could think in these options:
 ```java
 ctxt.getAbsolutePathOfScratchDirectoryOption();
@@ -802,7 +828,7 @@ BufferedOutputStream bos = ctxt.createScratchFileStream(classFileName);
 ### Data Transfer Objects
 Structures to communicate with databases, parsing messages from sockets...
 
-You usually use Beans => private properties with setters and getters. It is ok for OO purist but no other benefits. 
+You usually use Beans => private properties with setters and getters. It is ok for OO purist but no other benefits.
 ### Active Record
 **Data structures** with public (or beans) properties and methods like save, find, etc.
 
@@ -818,7 +844,7 @@ Choose the right approach!
 Things can go wrong, we as programmers are responsible for making sure that our codes does what it needs to do => **and should be clear!**
 
 Error handling is important but if it obscures logic it's wrong.
-## Use Exceptions Rather Than Return Codes 
+## Use Exceptions Rather Than Return Codes
 It is better to throw an exception.
 * The calling code is cleaner.
 * Its logic is not obscured by error handling.
@@ -835,12 +861,12 @@ private void tryToShutDown() throws DeviceShutDownError {
   // ..
 }
 ```
-## Write Your Try-Catch-Finally Statement First 
+## Write Your Try-Catch-Finally Statement First
 Try blocks are like transactions => *catch* has to leave your program in a consistent state, no matter what happens in the try.
 
 Write test that force exceptions and add behavior to satisfy your test.
 
-## Use Unchecked Exceptions 
+## Use Unchecked Exceptions
 Your code would not compile if the signature don't match to what your code do.
 
 Some programing languages do not have it and you can build robust software with them.
@@ -855,8 +881,8 @@ Pass enough information to be able to log the error in the catch. A stack trace 
 ## Deﬁne Exception Classes in Terms of a Caller’s Needs
 Sometimes is very useful to write a simple wrapper that catches an translates exceptions from a third-party API => minimize the dependencies upon it and you can move to other different library without much penalty.
 
-## Deﬁne the Normal Flow 
-SPECIAL CASE PATTERN [Fowler]: you create a class or configure an object so that it handles a special case for you => the client code does not have to deal with exceptional behavior because is encapsulated. 
+## Deﬁne the Normal Flow
+SPECIAL CASE PATTERN [Fowler]: you create a class or configure an object so that it handles a special case for you => the client code does not have to deal with exceptional behavior because is encapsulated.
 
 Example:
 ```java
@@ -907,7 +933,7 @@ public List<Employee> getEmployees() {
      return Collections.emptyList();
 }
 ```
-## Don’t Pass Null 
+## Don’t Pass Null
 **Returning null from methods is bad, but passing null into methods is worse**
 
 You have to deal with null, with if's or with assertions at the beginning asserts are good documentation).
@@ -953,8 +979,8 @@ public class Sensor {
 Avoid returning it or accepting it as an argument in public APIs.
 
 ## Exploring and Learning Boundaries
-**Learning tests** instead of experimenting an trying out the new stuff in our production code, we could write some tests to explore our understanding of the third-party code. 
- 
+**Learning tests** instead of experimenting an trying out the new stuff in our production code, we could write some tests to explore our understanding of the third-party code.
+
 ## Learning Tests Are Better Than Free
 Since you have to learn the 3rd party code anyway, learning tests are an easy way to learn *and* future-proof use of the API. With each release comes a new risk => we run the learning tests to see the changes.
 
@@ -964,7 +990,7 @@ Sometimes you have boundaries in your system that represents things that had not
 
 You can create your own interface with the idea of how this should work and implement a Fake implementation for testing purposes.
 See the Adapter pattern.
-## Clean Boundaries 
+## Clean Boundaries
 When we use code that is out of our control special care must be taken to protect our investment and make sure future change is not too costly.
 
 Wrap them or use an Adapter to convert from our perfect interface to the provided interface.
@@ -972,14 +998,14 @@ Wrap them or use an Adapter to convert from our perfect interface to the provide
 # <a name="unit-tests">9. Unit Tests</a>
 The Agile and TDD movements have encouraged many programmers to write unit tests but many of them have missed important points of writing good tests.
 
-## The Three Laws of TDD 
+## The Three Laws of TDD
 * **First Law**: You may not write production code until you have written a failing unit test.
 * **Second Law**: You may not write more of a unit test than is sufficient to fail, and not compiling is failing.
 * **Third Law**: You may not write more production code than is sufficient to pass the currently failing test.
 
 If we follow these rules we will write dozens of tests per day, hundreds of tests per month and thousands of tests every year. These tests can rival the size of the production code and can present a daunting management problem.
 
-## Keeping Tests Clean 
+## Keeping Tests Clean
 Dirty tests are equivalent or worse than having no tests! Need to follow the same rules of well-named variables, short & descriptive functions.
 
 Book example story: When managers asked why their estimates were getting so large, the developers blamed the tests. In the end they were forced to discard the test suite entirely.
@@ -999,7 +1025,7 @@ Unit tests keep our code flexible, maintainable and reusable. Without them every
 
 You can improve that architecture and design without fear!
 
-## Clean Tests 
+## Clean Tests
 **Readability makes clean test.**
 Clarity, simplicity and density of expression => say a lot with a few expressions as possible.
 
@@ -1056,20 +1082,20 @@ Functions and utilities that make the test more convenient to write and easier t
 
 It requires a continued refactoring.
 
-## A Dual Standard 
+## A Dual Standard
 The code within the testing API will be simple, succint, expressive but it need not be as efficient as production code. It runs in a test environment and it has different needs.
 
 You can write code that may break rules or is not very efficient but is ok if it makes the test easy to understand.
 
 Dual standard: There are things that you might never do in a production environment that are perfectly fine in a test environment.
 
-## One Assert per Test 
+## One Assert per Test
 This is a good guideline but the best thing we can say is that **the number of asserts in a test should be minimized.**
 
-## Single Concept per Test 
+## Single Concept per Test
 Better than one assert per test.
 
-**Best rule:** 
+**Best rule:**
 * **You should minimize the number of asserts per concept and test just one concept per test function**
 
 ## F.I.R.S.T
@@ -1086,7 +1112,7 @@ Better than one assert per test.
 # <a name="classes">10. Classes</a>
 
 Classes belong to higher levels of code organization.
-## Class Organization 
+## Class Organization
 Like a newspapaer article:
 * public static constants
 * private static variables
@@ -1094,7 +1120,7 @@ Like a newspapaer article:
 * public functions
 * private functions
 
-## Encapsulation 
+## Encapsulation
 Utitlity functions should be private but could be protected to be accesible by tests in the same package.
 
 ## Classes Should Be Small!
@@ -1128,7 +1154,7 @@ When classes lose cohesion split them!
 Breaking a large function into many smaller functions often gives us the opportunity to split several smaller classes out as well => better organization and more transparent structure.
 
 Do it with tests => write a test suit that verified the precise behavior of the first version. Then tiny little changes, one at a time to get the desired result.
-## Organizing for Change 
+## Organizing for Change
 **Open-Closed Principle** => Our classes should be open for extension but closed for modification.
 
 Allow new functionality via subclassing.
@@ -1139,71 +1165,71 @@ We incorporate new features by extending the system, not by making modifications
 ## Bibliography
 
 # <a name="systems">11. Systems</a>
-## How Would You Build a City? 
-## Separate Constructing a System from Using It 
-## Separation of Main 
-## Factories 
+## How Would You Build a City?
+## Separate Constructing a System from Using It
+## Separation of Main
+## Factories
 ## Dependency Injection
-## Scaling Up 
-## Cross-Cutting Concerns 
+## Scaling Up
+## Cross-Cutting Concerns
 ## Java Proxies
 ## Pure Java AOP Frameworks
-## AspectJ Aspects 
+## AspectJ Aspects
 ## Test Drive the System Architecture
-## Optimize Decision Making 
+## Optimize Decision Making
 ## Use Standards Wisely, When They Add Demonstrable Value
 ## Systems Need Domain-Speciﬁc Languages
 ## Conclusion
 ## Bibliography
 
 # <a name="emergence">12. Emergence</a>
-## Getting Clean via Emergent Design 
+## Getting Clean via Emergent Design
 ## Simple Design Rule 1: Runs All the Tests
-## Simple Design Rules 2–4: Refactoring 
+## Simple Design Rules 2–4: Refactoring
 ## No Duplication
 ## Expressive
-## Minimal Classes and Methods 
+## Minimal Classes and Methods
 ## Conclusion
 ## Bibliography
 
 # <a name="concurrency">13. Concurrency</a>
-## Why Concurrency? 
+## Why Concurrency?
 ## Myths and Misconceptions
-## Challenges 
+## Challenges
 ## Concurrency Defense Principles
-## Single Responsibility Principle 
-## Corollary: Limit the Scope of Data 
-## Corollary: Use Copies of Data 
-## Corollary: Threads Should Be as Independent as Possible 
-## Know Your Library 
+## Single Responsibility Principle
+## Corollary: Limit the Scope of Data
+## Corollary: Use Copies of Data
+## Corollary: Threads Should Be as Independent as Possible
+## Know Your Library
 ## Thread-Safe Collections
-## Know Your Execution Models 
+## Know Your Execution Models
 ## Producer-Consumer
 ## Readers-Writers
-## Dining Philosophers 
-## Beware Dependencies Between Synchronized Methods 
+## Dining Philosophers
+## Beware Dependencies Between Synchronized Methods
 ## Keep Synchronized Sections Small
 ## Writing Correct Shut-Down Code Is Hard
-## Testing Threaded Code 
-## Treat Spurious Failures as Candidate Threading Issues 
+## Testing Threaded Code
+## Treat Spurious Failures as Candidate Threading Issues
 ## Get Your Nonthreaded Code Working First
-## Make Your Threaded Code Pluggable 
+## Make Your Threaded Code Pluggable
 ## Make Your Threaded Code Tunable
 ## Run with More Threads Than Processors
-## Run on Different Platforms 
+## Run on Different Platforms
 ## Instrument Your Code to Try and Force Failures
-## Hand-Coded 
-## Automated 
+## Hand-Coded
+## Automated
 ## Conclusion
 ## Bibliography
 
 # <a name="successive-refinement">14. Successive Refinement</a>
-## Args Implementation 
-## How Did I Do This? 
-## Args: The Rough Draft 
-## So I Stopped 
-## On Incrementalism 
-## String Arguments 
+## Args Implementation
+## How Did I Do This?
+## Args: The Rough Draft
+## So I Stopped
+## On Incrementalism
+## String Arguments
 ## Conclusion
 
 # <a name="junit-internals">15. Junit Internals</a>
@@ -1218,89 +1244,94 @@ We incorporate new features by extending the system, not by making modifications
 
 
 # <a name="smells-and-heuristics">17. Smells and Heuristics</a>
-## Comments 
+## Comments
 ### C1: Inappropriate Information
 ### C2: Obsolete Comment
-### C3: Redundant Comment 
+### C3: Redundant Comment
 ### C4: Poorly Written Comment
-### C5: Commented-Out Code 
+### C5: Commented-Out Code
 **Just don't do it** If you want to do this; just slap yourself instead and ask what is wrong with me. Most people won't delete others commented out code since they assume there is a good reason for it. So it grows stale like a fine cheese(but bad cheese).
 
 
 
-## Environment 
+## Environment
 ### E1: Build Requires More Than One Step
-### E2: Tests Require More Than One Step 
+### E2: Tests Require More Than One Step
 
 ## Functions
 ## F1: Too Many Arguments
-## F2: Output Arguments 
-## F3: Flag Arguments 
-## F4: Dead Function 
+## F2: Output Arguments
+## F3: Flag Arguments
+## F4: Dead Function
 
-## General 
+## General
 ### G1: Multiple Languages in One Source File
 ### G2: Obvious Behavior Is Unimplemented
-### G3: Incorrect Behavior at the Boundaries 
-### G4: Overridden Safeties 
+### G3: Incorrect Behavior at the Boundaries
+### G4: Overridden Safeties
 ### G5: Duplication
 ### G6: Code at Wrong Level of Abstraction
-### G7: Base Classes Depending on Their Derivatives 
-### G8: Too Much Information 
+### G7: Base Classes Depending on Their Derivatives
+### G8: Too Much Information
 ### G9: Dead Code
-### G10: Vertical Separation 
-### G11: Inconsistency 
+### G10: Vertical Separation
+### G11: Inconsistency
 ### G12: Clutter
-### G13: Artiﬁcial Coupling 
+### G13: Artiﬁcial Coupling
 ### G14: Feature Envy
 ### G15: Selector Arguments
-### G16: Obscured Intent 
+### G16: Obscured Intent
 ### G17: Misplaced Responsibility
 ### G18: Inappropriate Static
-### G19: Use Explanatory Variables 
-### G20: Function Names Should Say What They Do 
-### G21: Understand the Algorithm 
+### G19: Use Explanatory Variables
+### G20: Function Names Should Say What They Do
+### G21: Understand the Algorithm
 ### G22: Make Logical Dependencies Physical
-### G23: Prefer Polymorphism to If/Else or Switch/Case 
+### G23: Prefer Polymorphism to If/Else or Switch/Case
 ### G24: Follow Standard Conventions
-### G25: Replace Magic Numbers with Named Constants 
+### G25: Replace Magic Numbers with Named Constants
 ### G26: Be Precise
 ### G27: Structure over Convention
-### G28: Encapsulate Conditionals 
-### G29: Avoid Negative Conditionals 
-### G30: Functions Should Do One Thing 
+### G28: Encapsulate Conditionals
+### G29: Avoid Negative Conditionals
+### G30: Functions Should Do One Thing
 ### G31: Hidden Temporal Couplings
-### G32: Don’t Be Arbitrary 
+### G32: Don’t Be Arbitrary
 ### G33: Encapsulate Boundary Conditions
 ### G34: Functions Should Descend Only
 
-## One Level of Abstraction 
+## One Level of Abstraction
 ### G35: Keep Conﬁgurable Data at High Levels
 ### G36: Avoid Transitive Navigation
 
-## Java 
+## Java
 ## J1: Avoid Long Import Lists by Using Wildcards
-## J2: Don’t Inherit Constants 
-## J3: Constants versus Enums 
+## J2: Don’t Inherit Constants
+## J3: Constants versus Enums
 
-## Names 
+## Names
 ### N1: Choose Descriptive Names
 ### N2: Choose Names at the Appropriate Level of Abstraction
 ### N3: Use Standard Nomenclature Where Possible
 ### N4: Unambiguous Names
 ### N5: Use Long Names for Long Scopes
-### N6: Avoid Encodings 
-### N7: Names Should Describe Side-Effects. 
+### N6: Avoid Encodings
+### N7: Names Should Describe Side-Effects.
 
-## Tests 
-### T1: Insufﬁcient Tests 
+## Tests
+### T1: Insufﬁcient Tests
 ### T2: Use a Coverage Tool!
-### T3: Don’t Skip Trivial Tests 
-### T4: An Ignored Test Is a Question about an Ambiguity 
+### T3: Don’t Skip Trivial Tests
+### T4: An Ignored Test Is a Question about an Ambiguity
 ### T5: Test Boundary Conditions
 ### T6: Exhaustively Test Near Bugs
-### T7: Patterns of Failure Are Revealing 
-### T8: Test Coverage Patterns Can Be Revealing 
+### T7: Patterns of Failure Are Revealing
+### T8: Test Coverage Patterns Can Be Revealing
 ### T9: Tests Should Be Fast
 
-## Conclusion
+| Code | Book |
+|-|-|
+| CC | Clean Code |
+| CA | Clean Architecture |
+| DP | Design Patterns |
+| IP | Implementation Patterns |
