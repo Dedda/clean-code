@@ -843,7 +843,7 @@ Choose the right approach!
 |-|-|-|
 | Implementation specific interfaces | Class interfaces get more restrictive to change the more concrete they are. If they tell you all about the internal workings of an object, then maybe it tells too much. A good interface only reveals intention, not implementation details. | `IP` -> `(Abstract) Interface`, `CA` -> `Polymorphism?` |
 | Mutable data structures | Mutable data structures make it harder to enforce a safe and functional code style. Instead of mutating a data structure, you should create a new copy with the altered values. The same applies to most cases of collections. Instead of removing items from a list, create a new list with only the desired items. | `CA` -> `Functional Programming`, `R` -> `Organizing Data` |
-
+| Train Wrecks | Having long chains of method calls going far outside your 'bubble' will make your code harder to read because you have to consider all the intermediate objects. Instead try to offer wrapper methods on the objects you are calling to provide you with what you need without having to unterstand the whole journey through your objects to get there. If that leads to an explosion of methods, you might consider reorganizing your data and overall structure of that part of your project. | `CC` -> `Law of Demeter` |
 
 # <a name="error-handling">7. Error Handling</a>
 Things can go wrong, we as programmers are responsible for making sure that our codes does what it needs to do => **and should be clear!**
@@ -948,6 +948,10 @@ A null in an argument is an indication of a problem.
 Clean code is readable, but it must also be robust! These are not conflicting goals: error handling can be seen as a separate concern, independent of the main logic.
 
 
+| Codesmell | Refactoring | Reference |
+|-|-|-|
+| Passing or returning  null | Using null is dangerous and can easily lead to NPEs that are hard to find and therefore eliminate. Instead considering using an exception if what the method tries to achieve cannot be done or use a 'null object' like an empty list for collections or a 'guest account' for users not logged in. | `R` -> `Introduce Null Object` |
+
 # <a name="boundaries">8. Boundaries</a>
 
 How to integrate code with 3rd-party or open source software.
@@ -999,6 +1003,10 @@ See the Adapter pattern.
 When we use code that is out of our control special care must be taken to protect our investment and make sure future change is not too costly.
 
 Wrap them or use an Adapter to convert from our perfect interface to the provided interface.
+
+| Codesmell | Refactoring | Reference |
+|-|-|-|
+| Using concrete library implememtation | Being dependent on a library classes interface or implementation can lead to big trouble in case that library changes. Instead of having to fix every piece of code making use of the changed object, try wrapping it and providing a simplified interface tailored to your specific needs. This way you only have to change your wrappers to achieve compatibility with a changed library. This also makes it easier to switch one library for another one. | `IP` -> `Evolving Frameworks`, `DP` -> `Adapter` |
 
 # <a name="unit-tests">9. Unit Tests</a>
 The Agile and TDD movements have encouraged many programmers to write unit tests but many of them have missed important points of writing good tests.
