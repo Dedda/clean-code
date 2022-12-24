@@ -449,7 +449,8 @@ Your real goal is to tell the story of the System. You have to write functions t
 |-|-|-|
 | Blocks and Indenting | Conditionals can be replaced by inheritance. This moves the deciding logic to a central place where different objects are created (Factory etc.). When reading the refactored method, it's easier to understand the single steps without having to understand their exact implementation or variation of the latter | `DP` -> `Creational Patterns`, `CA` -> `DIP/Factories`, `IP` -> `Methods` -> `Factory Method/Internal Factory` |
 | Switch Statements | See `Blocks and Indenting` |
-| Side effects | If you follow the functional approach strictly, then no function is allowed to have side effects. At least to some extent that makes sense and helps reducing complexity and unexpected behavior. Instead of setting a field after a calculation, the function may just return the new value. If the functions has more than one occurences of updated fields, the new values might either be coupled into a new return object or the function can be split to do only one thing where it makes sense. | `CA` -> Functional Programming |
+| Side effects | If you follow the functional approach strictly, then no function is allowed to have side effects. At least to some extent that makes sense and helps reducing complexity and unexpected behavior. Instead of setting a field after a calculation, the function may just return the new value. If the functions has more than one occurences of updated fields, the new values might either be coupled into a new return object or the function can be split to do only one thing where it makes sense. | `CA` -> `Functional Programming` |
+| Output Arguments | More common in languages like C++ but also in Java through mutable objects. Instead of altering an objects state, you should consider returning the new state and setting it outside of the function or move the method into the object that is being changed. | `IP` -> `Methods` -> `Method Return Type`, `CA` -> `Functional Programming` |
 
 # <a name="comments">4. Comments</a>
 If we were expressive enough in our programming language we would not need comments.
@@ -569,7 +570,6 @@ The comment should describe the code it appears near.
 Maybe the comment needs its own explanation...
 ### Function Headers
 Short functions do not need much description. We prefer well-chosen names than a comment header.
-
 
 # <a name="formatting">5. Formatting</a>
 We want people to perceive that professionals have been at work... not to see a scrambled mass of code that looks like it was written by a bevy of drunken sailors.
@@ -838,6 +838,11 @@ Developers put business logic in them => Error!
 Choose the right approach!
 * Flexibility to add new data types => objects
 * Flexibility to add new behaviors => data types and procedures
+
+| Codesmell | Refactoring | Reference |
+|-|-|-|
+| Implementation specific interfaces | Class interfaces get more restrictive to change the more concrete they are. If they tell you all about the internal workings of an object, then maybe it tells too much. A good interface only reveals intention, not implementation details. | `IP` -> `(Abstract) Interface`, `CA` -> `Polymorphism?` |
+| Mutable data structures | Mutable data structures make it harder to enforce a safe and functional code style. Instead of mutating a data structure, you should create a new copy with the altered values. The same applies to most cases of collections. Instead of removing items from a list, create a new list with only the desired items. | `CA` -> `Functional Programming`, `R` -> `Organizing Data` |
 
 
 # <a name="error-handling">7. Error Handling</a>
@@ -1335,3 +1340,4 @@ We incorporate new features by extending the system, not by making modifications
 | CA | Clean Architecture |
 | DP | Design Patterns |
 | IP | Implementation Patterns |
+| R  | Refactoring |
